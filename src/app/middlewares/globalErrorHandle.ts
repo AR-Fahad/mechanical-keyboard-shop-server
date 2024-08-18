@@ -17,7 +17,7 @@ export const globalErrorHandle = (
 ) => {
   let message: string = 'Custom Error';
 
-  let statusCode: number = error?.statusCode || error?.status || 500;
+  let statusCode: number = error?.statusCode || error?.status || 400;
 
   let errorSources: TErrorSources = [
     {

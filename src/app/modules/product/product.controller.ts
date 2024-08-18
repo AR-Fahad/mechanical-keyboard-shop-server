@@ -25,7 +25,54 @@ const getAllProducts = catchAsync(async (req: Request, res: Response) => {
   });
 });
 
+const getSingleProduct = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await ProductServices.getSingleProduct(id);
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Product retrieved successfully',
+    data: result,
+  });
+});
+
+const deleteProduct = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await ProductServices.deleteProduct(id);
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Product deleted successfully',
+    data: result,
+  });
+});
+
+const updateProduct = catchAsync(async (req: Request, res: Response) => {
+  const { id } = req.params;
+  const result = await ProductServices.updateProduct(id, req?.body);
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Product updated successfully',
+    data: result,
+  });
+});
+
+const orderProducts = catchAsync(async (req: Request, res: Response) => {
+  const { orders } = req.body;
+  await ProductServices.orderProducts(orders);
+  sendResponse(res, {
+    success: true,
+    statusCode: 200,
+    message: 'Products ordered successfully',
+  });
+});
+
 export const ProductControllers = {
   createProduct,
   getAllProducts,
+  getSingleProduct,
+  deleteProduct,
+  updateProduct,
+  orderProducts,
 };

@@ -9,6 +9,21 @@ export class QueryBuilder<T> {
     this.query = query;
   }
 
+  // for minimum & maximum price
+  priceRange() {
+    if (this?.query?.min) {
+      this.modelQuery = this.modelQuery.find({
+        price: { $gte: Number(this?.query?.min) },
+      });
+    }
+    if (this?.query?.max) {
+      this.modelQuery = this.modelQuery.find({
+        price: { $lte: Number(this?.query?.max) },
+      });
+    }
+    return this;
+  }
+
   // for searching
   search(searchableFields: string[]) {
     if (this?.query?.searchTerm) {
