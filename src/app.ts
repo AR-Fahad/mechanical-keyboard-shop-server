@@ -8,7 +8,12 @@ const app = express();
 
 // parser
 app.use(express.json());
-app.use(cors({ origin: '*', credentials: true }));
+app.use(
+  cors({
+    origin: 'https://mechanical-keyboard-shop-client-nine.vercel.app',
+    credentials: true,
+  }),
+);
 
 // app routes
 app.use('/api', router);
